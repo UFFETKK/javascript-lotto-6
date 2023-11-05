@@ -1,3 +1,5 @@
+import { isNumber } from "./validate";
+
 class Lotto {
   #numbers;
 
@@ -6,14 +8,12 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const check = /^[0-9]+$/;
-
     const unverifiedArray = numbers.replace(/(\s*)/g, "").split(",");
 
     if (unverifiedArray.length !== 6) throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
 
     const numberArr = unverifiedArray.map((item) => {
-      if (!check.test(item)) throw new Error("[ERROR] 숫자만 입력해주세요.");
+      isNumber(item);
 
       const number = Number(item);
       if (number < 0 || number > 45) throw new Error("[ERROR] 1부터 45까지의 숫자를 입력해주세요.");
@@ -29,9 +29,7 @@ class Lotto {
   // TODO: 추가 기능 구현
 
   validateBonusNumber(bonusNumber) {
-    const check = /^[0-9]+$/;
-    if (!check.test(bonusNumber)) throw new Error("[ERROR] 숫자만 입력해주세요.");
-
+    isNumber(bonusNumber);
     const isDupliCateValue = this.#numbers.indexOf(bonusNumber) >= 0;
     if (isDupliCateValue) throw new Error("[ERROR] 당첨 번호와 중복되지 않게 입력해주세요");
   }

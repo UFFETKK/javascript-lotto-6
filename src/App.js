@@ -12,18 +12,18 @@ class App {
     this.lottos = [];
   }
   async play() {
-    this.numberOfPurchases = await this.setPurchaseAmount();
+    await this.setPurchaseAmount();
     Console.print(`\n${this.numberOfPurchases}개를 구매했습니다.`);
 
     this.issueLottos();
-    this.targetLotto = await this.setWinningNumbers();
+    await this.setWinningNumbers();
   }
 
   async setPurchaseAmount() {
     const purchaseAmount = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
     if (purchaseAmount % UNIT) throw new Error("1000 단위로 입력해주세요.");
 
-    return parseInt(purchaseAmount / UNIT);
+    this.numberOfPurchases = parseInt(purchaseAmount / UNIT);
   }
 
   issueLottos() {
