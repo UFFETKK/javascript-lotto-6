@@ -1,10 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import UserLotto from "./UserLotto.js";
+import Lotto from "./Lotto.js";
 
 const UNIT = 1000;
 class App {
   numberOfPurchases;
   lottos;
+  targetLotto;
   constructor() {
     this.lottos = [];
   }
@@ -13,6 +15,7 @@ class App {
     Console.print(`\n${this.numberOfPurchases}개를 구매했습니다.`);
 
     this.issueLottos();
+    this.targetLotto = await this.setWinningNumbers();
   }
 
   async setPurchaseAmount() {
@@ -27,6 +30,11 @@ class App {
       const lotto = new UserLotto();
       this.lottos.push(lotto.numbers);
     }
+  }
+
+  async setWinningNumbers() {
+    const inputNumbers = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
+    this.targetLotto = new Lotto(inputNumbers);
   }
 }
 
