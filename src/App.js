@@ -7,6 +7,7 @@ class App {
   numberOfPurchases;
   lottos;
   targetLotto;
+  bonusNumber;
   constructor() {
     this.lottos = [];
   }
@@ -35,6 +36,12 @@ class App {
   async setWinningNumbers() {
     const inputNumbers = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
     this.targetLotto = new Lotto(inputNumbers);
+  }
+
+  async setBonusNumber() {
+    const bonusNumber = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+    this.targetLotto.validateBonusNumber(bonusNumber);
+    this.bonusNumber = Number(bonusNumber);
   }
 }
 

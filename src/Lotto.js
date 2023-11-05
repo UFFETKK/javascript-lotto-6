@@ -27,6 +27,14 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+
+  validateBonusNumber(bonusNumber) {
+    const check = /^[0-9]+$/;
+    if (!check.test(bonusNumber)) throw new Error("[ERROR] 숫자만 입력해주세요.");
+
+    const isDupliCateValue = this.#numbers.indexOf(bonusNumber) >= 0;
+    if (isDupliCateValue) throw new Error("[ERROR] 당첨 번호와 중복되지 않게 입력해주세요");
+  }
 }
 
 export default Lotto;
